@@ -1,0 +1,11 @@
+{
+	"$schema": "https://www.schemastore.org/tsconfig",
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"paths": {
+			"#/*": ["./src/*"]
+		},
+		"types": []
+	},
+	"include": ["src"]
+}

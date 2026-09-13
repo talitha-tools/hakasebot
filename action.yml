@@ -1,0 +1,112 @@
+name: hakasebot
+description: Run a login-auth coding CLI and post a native GitHub review
+author: talitha-tools
+inputs:
+  review_event:
+    description: COMMENT, REQUEST_CHANGES, APPROVE, or auto
+    required: false
+    default: auto
+  trigger_phrase:
+    description: Comment phrase that starts a mention pass. Home dispatcher sets this to @HOSTED_APP_SLUG when the hosted app is configured.
+    required: false
+  fix_phrase:
+    description: Line-comment phrase that starts a fix pass
+    required: false
+    default: "fix this"
+  fail_on_findings:
+    description: Fail the job when the report has findings
+    required: false
+    default: "false"
+  dry_run:
+    description: Parse and plan a review without posting
+    required: false
+    default: "false"
+  github_token:
+    description: Token used when posting as github-actions[bot]
+    required: false
+    default: ${{ github.token }}
+  github_app_id:
+    description: GitHub App client ID for JWT iss. A leftover numeric App ID still works.
+    required: false
+  github_app_private_key:
+    description: GitHub App private key
+    required: false
+  github_app_installation_id:
+    description: GitHub App installation id
+    required: false
+  target_repo:
+    description: Consumer owner/name
+    required: true
+  consumer_repo_id:
+    description: Consumer GitHub repository id
+    required: true
+  pull_number:
+    description: Consumer pull number
+    required: true
+  head_sha:
+    description: Consumer pull head SHA
+    required: false
+  installation_id:
+    description: Hosted bot App installation on the consumer
+    required: true
+  dispatch_id:
+    description: Wake correlation id
+    required: true
+  plan:
+    description: review, mention, or fix
+    required: true
+  comment_id:
+    description: Mention or fix comment id
+    required: false
+  progress_comment_id:
+    description: Progress issue comment to update
+    required: false
+  route_generation:
+    description: Repo claim generation from Wake
+    required: false
+  encryption_key:
+    description: User encryption key (Home repo secret)
+    required: false
+  lab_url:
+    description: Lab origin for claim recheck
+    required: false
+runs:
+  using: composite
+  steps:
+    - uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: "1.4.0"
+    - name: Install dependencies
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: bun install --frozen-lockfile --production --filter '@hakasebot/action'
+    - name: Run hakasebot
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      env:
+        INPUT_REVIEW_EVENT: ${{ inputs.review_event }}
+        INPUT_TRIGGER_PHRASE: ${{ inputs.trigger_phrase }}
+        INPUT_FIX_PHRASE: ${{ inputs.fix_phrase }}
+        INPUT_FAIL_ON_FINDINGS: ${{ inputs.fail_on_findings }}
+        INPUT_DRY_RUN: ${{ inputs.dry_run }}
+        INPUT_GITHUB_TOKEN: ${{ inputs.github_token }}
+        INPUT_GITHUB_APP_ID: ${{ inputs.github_app_id }}
+        INPUT_GITHUB_APP_PRIVATE_KEY: ${{ inputs.github_app_private_key }}
+        INPUT_GITHUB_APP_INSTALLATION_ID: ${{ inputs.github_app_installation_id }}
+        INPUT_TARGET_REPO: ${{ inputs.target_repo }}
+        INPUT_CONSUMER_REPO_ID: ${{ inputs.consumer_repo_id }}
+        INPUT_PULL_NUMBER: ${{ inputs.pull_number }}
+        INPUT_HEAD_SHA: ${{ inputs.head_sha }}
+        INPUT_INSTALLATION_ID: ${{ inputs.installation_id }}
+        INPUT_DISPATCH_ID: ${{ inputs.dispatch_id }}
+        INPUT_PLAN: ${{ inputs.plan }}
+        INPUT_COMMENT_ID: ${{ inputs.comment_id }}
+        INPUT_PROGRESS_COMMENT_ID: ${{ inputs.progress_comment_id }}
+        INPUT_ROUTE_GENERATION: ${{ inputs.route_generation }}
+        INPUT_ENCRYPTION_KEY: ${{ inputs.encryption_key }}
+        VITE_LAB_URL: ${{ inputs.lab_url }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_RUN_ID: ${{ github.run_id }}
+        GITHUB_SERVER_URL: ${{ github.server_url }}
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+      run: bun packages/action/src/action-main.ts

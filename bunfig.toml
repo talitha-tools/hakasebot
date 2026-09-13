@@ -1,0 +1,7 @@
+telemetry = false
+
+[test]
+preload = ["./packages/test-kit/preload.ts"]
+
+[install]
+minimumReleaseAge = 259200

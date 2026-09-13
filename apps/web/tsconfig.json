@@ -1,0 +1,11 @@
+{
+	"$schema": "https://www.schemastore.org/tsconfig",
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"paths": {
+			"#/*": ["./src/*"]
+		},
+		"types": ["node", "vite/client", "./worker-configuration.d.ts"]
+	},
+	"include": ["src", "tests", "*.ts"]
+}

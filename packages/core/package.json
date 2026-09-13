@@ -1,0 +1,28 @@
+{
+	"name": "@hakasebot/core",
+	"private": true,
+	"type": "module",
+	"imports": {
+		"#/*": "./src/*"
+	},
+	"exports": {
+		"./*": "./src/*"
+	},
+	"scripts": {
+		"test": "vitest run"
+	},
+	"dependencies": {
+		"blakejs": "^1.2.1",
+		"drizzle-orm": "catalog:",
+		"drizzle-zod": "^0.8.3",
+		"tweetnacl": "^1.0.3",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@hakasebot/test-kit": "workspace:*",
+		"@types/bun": "catalog:",
+		"@types/libsodium-wrappers": "catalog:",
+		"libsodium-wrappers": "catalog:",
+		"vitest": "catalog:"
+	}
+}

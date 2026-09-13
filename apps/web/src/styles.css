@@ -1,0 +1,103 @@
+@import "tailwindcss";
+@import "@fontsource/comic-neue/400.css";
+@import "@fontsource/comic-neue/700.css";
+@import "@fontsource/comic-neue/400-italic.css";
+@import "@fontsource/comic-neue/700-italic.css";
+
+/*
+  palette from nichijou cels / official art:
+  hair #FFB87A (hakase bangs), eyes #2E539F, tie/scarf #E95E5B,
+  lab coat #F9F9F9, paper #F7F9F6, ink #1F1E1D
+*/
+
+:root {
+	--paper: #f7f9f6;
+	--ink: #1f1e1d;
+	--accent: #ffb87a;
+	--accent-strong: #ffb87a;
+	--scarf: #e95e5b;
+	--eye: #2e539f;
+	--coat: #f9f9f9;
+	--key: #666767;
+	--blush: #ffd4c8;
+	--sticky: #f9f9f9;
+	--line: #1f1e1d;
+	--mint: #c0deac;
+}
+
+@theme inline {
+	--font-hand: "Comic Neue", "Comic Sans MS", cursive;
+	--font-round: "Comic Neue", "Comic Sans MS", cursive;
+	--font-mono: "Comic Neue", "Comic Sans MS", cursive;
+	--color-bg: var(--paper);
+	--color-ink: var(--ink);
+	--color-accent: var(--accent);
+	--color-accent-strong: var(--accent-strong);
+	--color-scarf: var(--scarf);
+	--color-eye: var(--eye);
+	--color-coat: var(--coat);
+	--color-key: var(--key);
+	--color-blush: var(--blush);
+	--color-sticky: var(--sticky);
+	--color-line: var(--line);
+	--color-mint: var(--mint);
+	--color-link: var(--eye);
+}
+
+@layer base {
+	html,
+	body,
+	#app {
+		min-height: 100%;
+	}
+
+	html {
+		height: 100%;
+
+		font-family: var(--font-round);
+		font-size: 17px;
+		color: var(--color-ink);
+
+		background-color: var(--color-bg);
+	}
+
+	body {
+		min-height: 100dvh;
+		background-color: var(--color-bg);
+	}
+
+	::selection {
+		color: var(--color-ink);
+		background-color: var(--color-accent);
+	}
+
+	a {
+		color: var(--color-link);
+		text-decoration: underline;
+	}
+
+	a:hover {
+		color: var(--color-scarf);
+	}
+
+	code {
+		padding: 0 0.25em;
+		border: 1px solid color-mix(in srgb, var(--color-ink) 25%, transparent);
+
+		font-family: var(--font-mono);
+		font-size: 0.95em;
+
+		background: var(--color-coat);
+	}
+
+	pre code {
+		padding: 0;
+		border: 0;
+		background: transparent;
+	}
+
+	h1,
+	h2 {
+		font-weight: 700;
+	}
+}

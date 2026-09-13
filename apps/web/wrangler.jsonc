@@ -1,0 +1,45 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "hakasebot",
+	"compatibility_date": "2026-09-10",
+	"compatibility_flags": ["nodejs_compat"],
+	"main": "@tanstack/react-start/server-entry",
+	"observability": {
+		"enabled": true,
+		"redact_query_string": true,
+		"traces": {
+			"enabled": true,
+		},
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "hakasebot",
+			"database_id": "9fd45cf2-92ab-4089-9240-0c526ac5cc94",
+			"migrations_dir": "migrations",
+		},
+	],
+	"kv_namespaces": [
+		{
+			"binding": "MODEL_CATALOG",
+			"id": "db5ff1e60c6b465391c7db4380a793ee",
+		},
+	],
+	"routes": [
+		{
+			"pattern": "hakase.talitha.tools",
+			"custom_domain": true,
+			"enabled": true,
+			"previews_enabled": false,
+		},
+	],
+	"vars": {
+		"HOSTED_APP_CLIENT_ID": "Iv23liR8aKNVEraoyGon",
+		"HOSTED_APP_SLUG": "hakasebot",
+		"VITE_ACTION_REF": "talitha-tools/hakasebot@main",
+		"VITE_LAB_URL": "https://hakase.talitha.tools/",
+		"VITE_SOURCE_REPO_URL": "https://github.com/talitha-tools/hakasebot",
+	},
+	"workers_dev": true,
+	"preview_urls": true,
+}

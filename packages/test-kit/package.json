@@ -1,0 +1,15 @@
+{
+	"name": "@hakasebot/test-kit",
+	"private": true,
+	"type": "module",
+	"exports": {
+		"./*": "./*"
+	},
+	"dependencies": {
+		"@hakasebot/core": "workspace:*",
+		"vitest": "catalog:"
+	},
+	"devDependencies": {
+		"@types/bun": "catalog:"
+	}
+}

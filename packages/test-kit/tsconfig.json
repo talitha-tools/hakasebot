@@ -1,0 +1,14 @@
+{
+	"$schema": "https://www.schemastore.org/tsconfig",
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"types": ["bun", "node"]
+	},
+	"include": [
+		"helpers",
+		"preload.ts",
+		"bun-polyfill.ts",
+		"tests",
+		"vitest.config.ts"
+	]
+}
